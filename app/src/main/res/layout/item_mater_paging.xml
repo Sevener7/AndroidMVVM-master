@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="@{() ->  callback.onClick(data)}"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:text="@{String.valueOf(data.date)}"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                tools:text="500" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="6sp"
+                android:text="电表" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@{String.valueOf(data.mater)}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="500" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="6sp"
+                android:text="电费" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@{String.valueOf(data.total_rent)}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="500" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="bottom"
+                android:textColor="@color/black"
+                android:textSize="6sp"
+                android:text="总共" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@{String.valueOf(data.total_spend)}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="500" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.hqumath.androidmvvm.entity.MaterInfoEntity" />
+
+        <variable
+            name="callback"
+            type="com.hqumath.androidmvvm.adapters.MaterPagedListAdapter.ClickCallback" />
+    </data>
+</layout>

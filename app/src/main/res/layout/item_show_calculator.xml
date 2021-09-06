@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="data"
+                type="com.hqumath.androidmvvm.entity.ShowCalculatorBeans"/>
+
+        <variable
+                name="callback"
+                type="com.hqumath.androidmvvm.adapters.CalculatorListAdapter.ClickCallback"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardUseCompatPadding="true"
+            android:onClick="@{() ->  callback.onClick(data)}"
+            >
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                tools:text="500"
+                android:text="@{data.mark}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="14sp"
+                android:textColor="@color/gray"
+                tools:text="本次使用度数为"
+                />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/blue_text"
+                    tools:text="500"
+                    android:text="@{String.valueOf(data.use_mater)}"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

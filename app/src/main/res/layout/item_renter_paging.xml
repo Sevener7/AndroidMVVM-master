@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="data"
+                type="com.hqumath.androidmvvm.entity.RenterInfoEntity"/>
+
+        <variable
+                name="callback"
+                type="com.hqumath.androidmvvm.adapters.RenterPagedListAdapter.ClickCallback"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardUseCompatPadding="true"
+            android:onClick="@{() ->  callback.onClick(data)}"
+            >
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+            <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textSize="26sp"
+                    android:textColor="@color/black"
+                    tools:text="name"
+                    android:text="@{data.name}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="6sp"
+                android:text="房租" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                tools:text="100"
+                android:text="@{String.valueOf(data.rent_room)}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="6sp"
+                android:text="水费" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                tools:text="100"
+                android:text="@{String.valueOf(data.rent_water)}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:textColor="@color/black"
+                android:textSize="6sp"
+                android:text="备注" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="15sp"
+                android:textColor="@color/gray"
+                android:text="@{data.mark}"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

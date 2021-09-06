@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="data"
+            type="com.hqumath.androidmvvm.entity.TotalMaterEntity" />
+
+        <variable
+            name="callback"
+            type="com.hqumath.androidmvvm.adapters.TotalRenterListAdapter.ClickCallback" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="@{() ->  callback.onClick(data)}"
+        android:orientation="horizontal"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.date}"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:layout_marginLeft="20sp"
+                android:textStyle="bold"
+                tools:text="Name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(data.mater)}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginLeft="20sp"
+                tools:text="introduction" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(data.mater)}"
+                android:textColor="@color/gray1"
+                android:textSize="12sp"
+                android:layout_marginLeft="20sp"
+                tools:text="author" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

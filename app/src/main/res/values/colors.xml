@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--标题栏-->
+    <color name="colorPrimary">#3F51B5</color>
+    <!--状态栏-->
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <!--主题-->
+    <color name="colorAccent">#3F51B5</color>
+    <!--主题背景色-->
+    <color name="windowBackground">#F5F5F5</color>
+
+    <color name="light_teal_icon_color">#000000</color>
+
+
+    <color name="black">#000000</color>
+    <color name="gray">#ADADAD</color>
+    <color name="gray1">#666666</color>
+    <color name="white">#ffffff</color>
+    <color name="green">#6EB502</color>
+
+    <color name="line">#E3E3E3</color>
+    <color name="background">#eeeeee</color>
+
+    <color name="bottom_navigation_normal">#ADADAD</color>
+    <color name="new_text_blue">#2e69cb</color>
+    <color name="blue_text">#012e84</color>
+</resources>

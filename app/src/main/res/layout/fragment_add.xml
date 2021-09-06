@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.hqumath.androidmvvm.ui.add.addRenter.AddViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:text="@={viewModel.name}"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_rent_room_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="rent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_rent_room_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:text="@={viewModel.rentRoom}"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_rent_water_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="water">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_rent_water_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:text="@={viewModel.rentWater}"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_mark_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="mark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_mark_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:text="@={viewModel.mark}"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btn_add_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_login"
+            android:textColor="@color/white"
+            android:text="Sure"/>
+    </LinearLayout>
+
+</layout>

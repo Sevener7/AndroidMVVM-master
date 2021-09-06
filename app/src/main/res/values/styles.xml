@@ -1,0 +1,54 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item><!--导航栏-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!--状态栏-->
+        <item name="colorAccent">@color/colorAccent</item><!--控件选中后颜色-->
+        <item name="android:windowBackground">@color/windowBackground</item>
+
+        <item name="android:windowAnimationStyle">@style/TranAnimation</item><!--切换动画-->
+        <item name="icon_color">@color/light_teal_icon_color</item><!--自定义图标颜色-->
+
+        <!--TabLayout样式-->
+        <item name="tabBackground">@color/colorAccent</item>
+        <item name="tabTextColor">#80ffffff</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+    </style>
+
+    <!--切换动画-->
+    <style name="TranAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_to_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_from_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_to_right</item>
+    </style>
+
+    <!--TabLayout文本样式-->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!--对话框的样式-->
+    <style name="LoadingDialog">
+        <!--对话框背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--没有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!--背景透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 是否有覆盖 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--背景变暗-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="Dialog_Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>
