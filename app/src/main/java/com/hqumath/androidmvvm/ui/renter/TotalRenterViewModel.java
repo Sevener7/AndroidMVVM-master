@@ -54,7 +54,7 @@ public class TotalRenterViewModel extends BaseViewModel<MyRepository> {
     }
 
     public void init() {
-        Date dNow = new Date();
+        /*Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
         date.setValue(ft.format(dNow));
         //update result
@@ -68,7 +68,7 @@ public class TotalRenterViewModel extends BaseViewModel<MyRepository> {
                 materInfoEntity.setValue(Double.parseDouble(String.format("%.2f", totalElect)));
                 model.updateTotalMater(materInfoEntity);
             }
-        }
+        }*/
         list = new LivePagedListBuilder<>(
                 model.loadAllTotalMaters(),
                 new PagedList.Config.Builder()

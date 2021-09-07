@@ -61,11 +61,21 @@ public class AddMaterViewModel extends BaseViewModel<MyRepository> {
         isRecycleVisible.setValue(false);
     }
 
-    public void addMater(int renterId) {
+    @SuppressLint("DefaultLocale")
+    public void addMater(int renterId, int rentRoom, int rentWater) {
         MaterInfoEntity entity = new MaterInfoEntity();
         entity.setRenter_id(renterId);
         entity.setMater(Integer.parseInt(mater.getValue()));
         entity.setDate(date.getValue());
+        List<MaterInfoEntity> currentList = model.getAllMatersById(renterId);
+        if (currentList.size() > 0) {
+            double totalElect = (Integer.parseInt(mater.getValue()) - currentList.get(currentList.size() - 1).getMater());
+            double totalElectMoney = totalElect * 1.3;
+            double totalSpend = totalElectMoney + rentRoom + rentWater;
+            entity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));
+            entity.setTotal_rent(Double.parseDouble(String.format("%.2f", totalElectMoney)));
+            entity.setTotal_spend(Double.parseDouble(String.format("%.2f", totalSpend)));
+        }
         model.runInTransaction(() -> {
             model.insertMater(entity);
             isRecycleVisible.setValue(true);
@@ -77,7 +87,7 @@ public class AddMaterViewModel extends BaseViewModel<MyRepository> {
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
         date.setValue(ft.format(dNow));
-        //update result
+/*        //update result
         List<MaterInfoEntity> currentList = model.getAllMatersById(renterId);
         Logger.getLogger("List<MaterInfoEntity>").log(Level.INFO, Arrays.toString(currentList.toArray()));
         for (int i = 1; i < currentList.size()+1; i++) {
@@ -91,9 +101,11 @@ public class AddMaterViewModel extends BaseViewModel<MyRepository> {
                 materInfoEntity.setTotal_rent(Double.parseDouble(String.format("%.2f", totalElectMoney)));
                 materInfoEntity.setTotal_spend(Double.parseDouble(String.format("%.2f", totalSpend)));
                 model.updateMater(materInfoEntity);
+//                list.notify();
             }
         }
 //        calculator(renterId, rentRoom, rentWater);
+*/
         list = new LivePagedListBuilder<>(
                 model.loadMatersByRenterId(renterId),
                 new PagedList.Config.Builder()
@@ -103,7 +115,6 @@ public class AddMaterViewModel extends BaseViewModel<MyRepository> {
                 .setFetchExecutor(appExecutors.diskIO())
 //                .setBoundaryCallback(boundaryCallback)
                 .build();
-//        Logger.getLogger("TEST").log(Level.INFO, list.getValue().size() + "SIze");
     }
 
 }

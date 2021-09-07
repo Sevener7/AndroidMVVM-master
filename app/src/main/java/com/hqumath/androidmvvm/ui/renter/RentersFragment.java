@@ -14,6 +14,7 @@ import com.hqumath.androidmvvm.databinding.FragmentRenterBinding;
 import com.hqumath.androidmvvm.entity.NetworkState;
 import com.hqumath.androidmvvm.entity.RenterInfoEntity;
 import com.hqumath.androidmvvm.ui.add.addMater.AddMaterActivity;
+import com.hqumath.androidmvvm.ui.add.addMater.UpdateMaterActivity;
 import com.hqumath.androidmvvm.ui.profile.ProfileActivity;
 import com.hqumath.androidmvvm.ui.view.dialog.DialogCancelListener;
 import com.hqumath.androidmvvm.ui.view.dialog.DialogConfirmListener;
@@ -69,13 +70,17 @@ public class RentersFragment extends BaseViewModelFragment<FragmentRenterBinding
             @Override
             public void onLongClick(@NonNull RenterInfoEntity data) {
                 Logger.getLogger(TAG).log(Level.INFO,"长按了："+data.toString());
-                showDialog(String.format(Locale.getDefault(),"确定删除%s吗",data.getName()),"删除","取消",
+                showDialog(String.format(Locale.getDefault(),"请选择删除还是编辑%s",data.getName()),"删除","编辑",
                         () -> {
                             viewModel.deleteByRenterId(data.getId());
                         }, new DialogCancelListener() {
                     @Override
                     public void onClickCancel() {
-                        Logger.getLogger(TAG).log(Level.INFO,"点击了取消，对话框消失");
+                        Intent intent = new Intent(mContext, UpdateMaterActivity.class);
+                        intent.putExtra("renter_id", String.valueOf(data.getId()));
+                        intent.putExtra("renter_data", String.format("%s_%s_%s",data.getName(),data.getRent_room(),
+                                data.getRent_water()));
+                        startActivity(intent);
                     }
                 });
             }

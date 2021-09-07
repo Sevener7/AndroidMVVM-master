@@ -73,7 +73,6 @@ public class CalculatorMaterViewModel extends BaseViewModel<MyRepository> {
             useValue = totalValue - shareValue;
         }
         value.setValue(String.format(Locale.getDefault(),"总共使用：%.1f,电表相加：%.1f,公摊：%.1f",totalValue,useValue,shareValue));
-
         list = new LivePagedListBuilder<>(
                 model.getShowAllCalculatorBeanListByDate(date),
                 new PagedList.Config.Builder()

@@ -107,6 +107,9 @@ public class MyRepository {
     public List<RenterInfoEntity> findRenterByName(String name){
         return mDatabase.renterInfoDao().findByName(name);
     }
+    public List<RenterInfoEntity> findRenterById(int id){
+        return mDatabase.renterInfoDao().findById(id);
+    }
     public void updateRenter(RenterInfoEntity renterInfoEntity){
         mDatabase.renterInfoDao().update(renterInfoEntity);
     }

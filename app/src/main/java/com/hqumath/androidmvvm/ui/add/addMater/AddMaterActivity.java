@@ -70,7 +70,7 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
         binding.btnAddMater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.addMater(renterId);
+                viewModel.addMater(renterId,rentRoom,rentWater);
 //                Logger.getLogger(TAG).log(Level.INFO,"Visibility="+binding.list.getVisibility());
             }
         });
@@ -116,5 +116,6 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
             Logger.getLogger(TAG).log(Level.INFO,"Visibility22="+b);
         });
     }
+
 
 }

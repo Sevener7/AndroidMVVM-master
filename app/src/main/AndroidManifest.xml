@@ -30,7 +30,9 @@
         <activity android:name=".ui.repos.ReposDetailActivity"/>
         <activity android:name=".ui.main.MainActivity1"/>
         <activity android:name=".ui.add.addMater.AddMaterActivity"/>
+        <activity android:name=".ui.add.addMater.UpdateMaterActivity"/>
         <activity android:name=".ui.add.calculate.CalculatorMaterActivity"/>
+
 
     </application>
 

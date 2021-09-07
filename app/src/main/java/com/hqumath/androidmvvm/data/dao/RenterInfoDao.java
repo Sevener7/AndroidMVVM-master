@@ -62,7 +62,9 @@ public interface RenterInfoDao {
     //根据名字查询是否存在
     @Query("select * FROM renter_info where name=:name")
     List<RenterInfoEntity> findByName(String name);
-
+    //update
+    @Query("select * FROM renter_info where id=:id")
+    List<RenterInfoEntity> findById(int id);
     @Update
     void update(RenterInfoEntity renterInfoEntity);
 }
