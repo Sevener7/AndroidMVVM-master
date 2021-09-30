@@ -45,7 +45,7 @@ public class AddTotalMaterViewModel extends BaseViewModel<MyRepository> {
                 for(ShowCalculatorBeans showCalculatorBeans : list1){
                     useValue+=showCalculatorBeans.getUse_mater();
                 }
-                entity.setShare_value(totalElect-useValue);
+                entity.setShare_value(Double.parseDouble(String.format("%.2f", totalElect-useValue)));
             }
             model.insertTotalMater(entity);
         });
