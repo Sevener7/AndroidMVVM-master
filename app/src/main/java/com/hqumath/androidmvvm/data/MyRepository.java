@@ -5,6 +5,7 @@ import androidx.paging.DataSource;
 
 import com.hqumath.androidmvvm.entity.MaterInfoEntity;
 import com.hqumath.androidmvvm.entity.RenterInfoEntity;
+import com.hqumath.androidmvvm.entity.ShowBatchRenterInfoEntity;
 import com.hqumath.androidmvvm.entity.ShowCalculatorBeans;
 import com.hqumath.androidmvvm.entity.TotalMaterEntity;
 import com.hqumath.androidmvvm.entity.UserInfoEntity;
@@ -133,6 +134,12 @@ public class MyRepository {
     }
 
     public void insertMater(MaterInfoEntity materInfoEntity){
+        //查询是否存在，如果存在，更新
+        List<MaterInfoEntity> dataList = mDatabase.materInfoDao().loadByDate(materInfoEntity.getDate(),materInfoEntity.getRenter_id());
+        if(dataList.size()>0){
+            //设置ID,如果ID存在那么更新，否则插入
+            materInfoEntity.setMater_id(dataList.get(0).getMater_id());
+        }
         mDatabase.materInfoDao().insertOne(materInfoEntity);
     }
     public DataSource.Factory<Integer, MaterInfoEntity> loadMatersByRenterId(int renterId) {
@@ -170,6 +177,9 @@ public class MyRepository {
     }
     public DataSource.Factory<Integer,ShowCalculatorBeans> getShowAllCalculatorBeanListByDate(String date){
         return mDatabase.materInfoDao().getShowAllCalculatorByDate(date);
+    }
+    public DataSource.Factory<Integer, ShowBatchRenterInfoEntity> getShowAllBatchRenterInfoEntityList(String date){
+        return mDatabase.materInfoDao().getShowBatchRenterInfoEntity(date);
     }
     public void deleteTotalRenterByDate(String date){
         mDatabase.totalMaterDao().deleteByDate(date);

@@ -48,7 +48,7 @@ public class AddTotalMaterFragment extends BaseViewModelFragment<FragmentAddTota
             if (valid) {
                 binding.btnAddSure.setEnabled(false);
                 viewModel.saveTotalMater();
-                binding.userNameEt.setText("");
+//                binding.userNameEt.setText("");
                 binding.userRentRoomEt.setText("");
                 binding.btnAddSure.setEnabled(true);
             }
@@ -58,5 +58,6 @@ public class AddTotalMaterFragment extends BaseViewModelFragment<FragmentAddTota
     @Override
     public void initData() {
         binding.setViewModel(viewModel);
+        viewModel.init();
     }
 }

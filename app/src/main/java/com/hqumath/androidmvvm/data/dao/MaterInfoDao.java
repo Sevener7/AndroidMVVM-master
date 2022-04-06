@@ -10,6 +10,7 @@ import androidx.room.Update;
 
 import com.hqumath.androidmvvm.entity.MaterInfoEntity;
 import com.hqumath.androidmvvm.entity.RenterInfoEntity;
+import com.hqumath.androidmvvm.entity.ShowBatchRenterInfoEntity;
 import com.hqumath.androidmvvm.entity.ShowCalculatorBeans;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public interface MaterInfoDao {
             "WHERE mater_info.renter_id == :renterId ORDER BY date ASC")
     List<MaterInfoEntity>  loadById(int renterId);
     @Query("SELECT * from mater_info " +
+            "WHERE mater_info.date == :date and renter_id == :renterId ORDER BY date ASC")
+    List<MaterInfoEntity>  loadByDate(String date,int renterId);
+    @Query("SELECT * from mater_info " +
             "WHERE renter_id == :renterId ORDER BY date ASC")
     DataSource.Factory<Integer, MaterInfoEntity> getMaterInfoByRenterId(int renterId);
 
@@ -42,4 +46,9 @@ public interface MaterInfoDao {
     @Query("SELECT use_mater,mark from mater_info LEFT JOIN renter_info ON mater_info.renter_id=renter_info.id " +
             "WHERE mater_info.date == :date ORDER BY date ASC")
     DataSource.Factory<Integer,ShowCalculatorBeans> getShowAllCalculatorByDate(String date);
+
+    //使用内连接查询
+    @Query("SELECT mater,date,name from mater_info LEFT JOIN renter_info ON mater_info.renter_id=renter_info.id " +
+            "WHERE mater_info.date == :date ORDER BY 2")
+    DataSource.Factory<Integer, ShowBatchRenterInfoEntity> getShowBatchRenterInfoEntity(String date);
 }

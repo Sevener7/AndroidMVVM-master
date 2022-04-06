@@ -68,8 +68,9 @@ public class AddMaterViewModel extends BaseViewModel<MyRepository> {
         entity.setMater(Integer.parseInt(mater.getValue()));
         entity.setDate(date.getValue());
         List<MaterInfoEntity> currentList = model.getAllMatersById(renterId);
-        if (currentList.size() > 0) {
-            double totalElect = (Integer.parseInt(mater.getValue()) - currentList.get(currentList.size() - 1).getMater());
+        System.out.println("currentList="+Arrays.toString(currentList.toArray()));
+        if (currentList.size() > 1) {
+            double totalElect = (Integer.parseInt(mater.getValue()) - currentList.get(currentList.size() - 2).getMater());
             double totalElectMoney = totalElect * 1.3;
             double totalSpend = totalElectMoney + rentRoom + rentWater;
             entity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));

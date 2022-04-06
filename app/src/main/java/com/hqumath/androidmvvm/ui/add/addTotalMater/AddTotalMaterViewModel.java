@@ -12,6 +12,8 @@ import com.hqumath.androidmvvm.entity.RenterInfoEntity;
 import com.hqumath.androidmvvm.entity.ShowCalculatorBeans;
 import com.hqumath.androidmvvm.entity.TotalMaterEntity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,5 +51,10 @@ public class AddTotalMaterViewModel extends BaseViewModel<MyRepository> {
             }
             model.insertTotalMater(entity);
         });
+    }
+    public void init(){
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
+        date.setValue(ft.format(dNow));
     }
 }

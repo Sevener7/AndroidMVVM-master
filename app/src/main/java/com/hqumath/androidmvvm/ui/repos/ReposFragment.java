@@ -9,6 +9,7 @@ import com.hqumath.androidmvvm.base.BaseFragment;
 import com.hqumath.androidmvvm.databinding.FragmentReposBinding;
 import com.hqumath.androidmvvm.ui.follow.FollowersFragment;
 import com.hqumath.androidmvvm.ui.follow.FollowingFragment;
+import com.hqumath.androidmvvm.ui.renter.BatchFragment;
 import com.hqumath.androidmvvm.ui.renter.RentersFragment;
 import com.hqumath.androidmvvm.ui.renter.TotalRenterFragment;
 
@@ -40,12 +41,12 @@ public class ReposFragment extends BaseFragment<FragmentReposBinding> {
     public void initData() {
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(new RentersFragment());
-//        fragmentList.add(new StarredFragment());
         fragmentList.add(new TotalRenterFragment());
-
+        fragmentList.add(new BatchFragment());
         List<String> titles = new ArrayList<>();
         titles.add("Renters");
         titles.add("TotalMater");
+        titles.add("Batch");
 
         MyFragmentPagerAdapter pagerAdapter =
                 new MyFragmentPagerAdapter(getChildFragmentManager());

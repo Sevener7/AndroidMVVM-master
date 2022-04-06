@@ -28,7 +28,7 @@ public interface RenterInfoDao {
     @Query("select * from renter_info")
     LiveData<List<RenterInfoEntity>> loadAll();
 
-    @Query("select * from renter_info")
+    @Query("select * from renter_info order by 2")
     DataSource.Factory<Integer, RenterInfoEntity> loadAll1();
 
 //    @Query("SELECT * FROM renter_info ORDER BY indexInResponse ASC")
