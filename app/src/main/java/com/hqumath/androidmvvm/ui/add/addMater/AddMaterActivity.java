@@ -92,10 +92,10 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
             @Override
             public void onClick(@NonNull MaterInfoEntity data) {
                 Logger.getLogger("TAG").log(Level.INFO,"单击了："+data.toString());
-//                Intent intent = new Intent(mContext, AddMaterActivity.class);
-//                intent.putExtra("renter_id", String.valueOf(data.getRenter_id()));
-//                intent.putExtra("renter_name", data.getName());
-//                startActivity(intent);
+                Intent intent = new Intent(mContext, AddMaterActivity.class);
+                intent.putExtra("renter_id", String.valueOf(data.getRenter_id()));
+                intent.putExtra("renter_name", renterName);
+                startActivity(intent);
             }
 
             @Override
