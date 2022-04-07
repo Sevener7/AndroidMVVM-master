@@ -128,10 +128,10 @@ public class BatchViewModel extends BaseViewModel<MyRepository> {
     @SuppressLint("DefaultLocale")
     public void addMater(ShowBatchRenterInfoEntity renterInfoEntity, int currentValue,String date) {
         MaterInfoEntity entity = new MaterInfoEntity();
-        entity.setRenter_id(renterInfoEntity.getId());
+        entity.setRenter_id(renterInfoEntity.getRenter_id());
         entity.setMater(currentValue);
         entity.setDate(date);
-        List<MaterInfoEntity> currentList = model.getAllMatersById(renterInfoEntity.getId());
+        List<MaterInfoEntity> currentList = model.getAllMatersById(renterInfoEntity.getRenter_id());
         if (currentList.size() > 0) {
             double totalElect = (currentValue - currentList.get(currentList.size() - 1).getMater());
             double totalElectMoney = totalElect * 1.3;

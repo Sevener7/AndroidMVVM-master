@@ -1,31 +1,19 @@
 package com.hqumath.androidmvvm.ui.add.addMater;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
 import com.hqumath.androidmvvm.R;
 import com.hqumath.androidmvvm.adapters.MaterPagedListAdapter;
-import com.hqumath.androidmvvm.adapters.RenterPagedListAdapter;
 import com.hqumath.androidmvvm.base.BaseViewModelActivity;
 import com.hqumath.androidmvvm.databinding.ActivityAddMaterBinding;
-import com.hqumath.androidmvvm.databinding.ActivityProfileBinding;
 import com.hqumath.androidmvvm.entity.MaterInfoEntity;
-import com.hqumath.androidmvvm.entity.NetworkState;
-import com.hqumath.androidmvvm.entity.RenterInfoEntity;
-import com.hqumath.androidmvvm.ui.view.dialog.DialogCancelListener;
-import com.hqumath.androidmvvm.utils.CommonUtil;
 
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,9 +33,10 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
     private String renterName;
     private Integer rentRoom;
     private Integer rentWater;
-
+    private int materId = -1;
 
     private MaterPagedListAdapter adapter;
+
     @Override
     public AddMaterViewModel getViewModel() {
         return ViewModelProviders.of(this).get(AddMaterViewModel.class);
@@ -70,7 +59,11 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
         binding.btnAddMater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.addMater(renterId,rentRoom,rentWater);
+                int result = viewModel.addMater(renterId, materId, rentRoom, rentWater);
+                materId = -1;
+                if (result == -1) {
+                    finish();
+                }
 //                Logger.getLogger(TAG).log(Level.INFO,"Visibility="+binding.list.getVisibility());
             }
         });
@@ -86,12 +79,11 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
         rentWater = Integer.parseInt(data[2]);
         setTitle(data[0]);
         binding.setViewModel(viewModel);
-        viewModel.init(renterId,rentRoom,rentWater);
-
+        viewModel.init(renterId, rentRoom, rentWater);
         adapter = new MaterPagedListAdapter(new MaterPagedListAdapter.ClickCallback() {
             @Override
             public void onClick(@NonNull MaterInfoEntity data) {
-                Logger.getLogger("TAG").log(Level.INFO,"单击了："+data.toString());
+                Logger.getLogger("TAG").log(Level.INFO, "单击了：" + data.toString());
 //                Intent intent = new Intent(mContext, AddMaterActivity.class);
 //                intent.putExtra("renter_id", String.valueOf(data.getRenter_id()));
 //                intent.putExtra("renter_name", data.getName());
@@ -99,7 +91,7 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
                 viewModel.showAdd();
                 viewModel.mater.setValue(data.getMater().toString());
                 viewModel.date.setValue(data.getDate());
-
+                materId = data.getMater_id();
             }
 
             @Override
@@ -114,10 +106,11 @@ public class AddMaterActivity extends BaseViewModelActivity<ActivityAddMaterBind
         });
         binding.list.setAdapter(adapter);
     }
+
     public void initViewObservable() {
         viewModel.list.observe(this, adapter::submitList);
         viewModel.isRecycleVisible.observe(this, b -> {
-            Logger.getLogger(TAG).log(Level.INFO,"Visibility22="+b);
+            Logger.getLogger(TAG).log(Level.INFO, "Visibility22=" + b);
         });
     }
 

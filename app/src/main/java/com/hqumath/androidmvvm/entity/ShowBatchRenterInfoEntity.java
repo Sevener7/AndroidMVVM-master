@@ -8,19 +8,19 @@ package com.hqumath.androidmvvm.entity;
  **/
 
 public class ShowBatchRenterInfoEntity {
-    private Integer id;
+    private Integer renter_id;
     private int mater;
     private String name;
     private Integer rent_room;
     private Integer rent_water;
 
 
-    public Integer getId() {
-        return id;
+    public Integer getRenter_id() {
+        return renter_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setRenter_id(Integer renter_id) {
+        this.renter_id = renter_id;
     }
 
     public int getMater() {
@@ -58,7 +58,7 @@ public class ShowBatchRenterInfoEntity {
     @Override
     public String toString() {
         return "ShowBatchRenterInfoEntity{" +
-                "id=" + id +
+                "renter_id=" + renter_id +
                 ", mater=" + mater +
                 ", name='" + name + '\'' +
                 ", rent_room=" + rent_room +

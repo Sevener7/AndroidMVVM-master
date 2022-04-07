@@ -19,6 +19,7 @@ import com.hqumath.androidmvvm.http.HandlerException;
 import com.hqumath.androidmvvm.http.HttpOnNextListener;
 import com.hqumath.androidmvvm.http.RetrofitClient;
 import com.hqumath.androidmvvm.http.service.MyApiService;
+import com.hqumath.androidmvvm.ui.add.addTotalMater.AddTotalMaterViewModel;
 import com.hqumath.androidmvvm.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,25 +64,65 @@ public class AddMaterViewModel extends BaseViewModel<MyRepository> {
     }
 
     @SuppressLint("DefaultLocale")
-    public void addMater(int renterId, int rentRoom, int rentWater) {
+    public int addMater(int renterId, int materId, int rentRoom, int rentWater) {
         MaterInfoEntity entity = new MaterInfoEntity();
         entity.setRenter_id(renterId);
         entity.setMater(Integer.parseInt(mater.getValue()));
         entity.setDate(date.getValue());
         List<MaterInfoEntity> currentList = model.getAllMatersById(renterId);
-        System.out.println("currentList="+Arrays.toString(currentList.toArray()));
-        if (currentList.size() > 1) {
-            double totalElect = (Integer.parseInt(mater.getValue()) - currentList.get(currentList.size() - 2).getMater());
-            double totalElectMoney = totalElect * 1.3;
-            double totalSpend = totalElectMoney + rentRoom + rentWater;
-            entity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));
-            entity.setTotal_rent(Double.parseDouble(String.format("%.2f", totalElectMoney)));
-            entity.setTotal_spend(Double.parseDouble(String.format("%.2f", totalSpend)));
+        System.out.println("currentList=" + Arrays.toString(currentList.toArray()));
+        //第一个修改
+        double totalElect;
+        double totalElectMoney;
+        double totalSpend;
+        if(currentList.size() > 0){
+            if (materId == currentList.get(0).getMater_id()) {
+                totalElect = 0;
+                totalElectMoney = 0;
+                totalSpend = 0;
+            } else {
+                if (materId != -1) {
+                    //编辑
+                    totalElect = (Integer.parseInt(mater.getValue()) - currentList.get(currentList.size() - 2).getMater());
+                } else {
+                    //新增
+                    totalElect = (Integer.parseInt(mater.getValue()) - currentList.get(currentList.size() - 1).getMater());
+                }
+
+                totalElectMoney = totalElect * 1.3;
+                totalSpend = totalElectMoney + rentRoom + rentWater;
+
+            }
+        }else {
+            totalElect = 0;
+            totalElectMoney = 0;
+            totalSpend = 0;
         }
+        entity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));
+        entity.setTotal_rent(Double.parseDouble(String.format("%.2f", totalElectMoney)));
+        entity.setTotal_spend(Double.parseDouble(String.format("%.2f", totalSpend)));
         model.runInTransaction(() -> {
             model.insertMater(entity);
-            isRecycleVisible.setValue(true);
         });
+        if (materId != -1) {
+            //编辑之后，遍历更新totalElect
+            List<MaterInfoEntity> currentList2 = model.getAllMatersById(renterId);
+            for (int i = 1; i <= currentList2.size() - 1; i++) {
+                MaterInfoEntity materInfoEntity = currentList2.get(i);
+                totalElect = (currentList2.get(i).getMater() - currentList2.get(i - 1).getMater());
+                totalElectMoney = totalElect * 1.3;
+                totalSpend = totalElectMoney + rentRoom + rentWater;
+                materInfoEntity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));
+                materInfoEntity.setTotal_rent(Double.parseDouble(String.format("%.2f", totalElectMoney)));
+                materInfoEntity.setTotal_spend(Double.parseDouble(String.format("%.2f", totalSpend)));
+                model.runInTransaction(() -> {
+                    model.insertMater(materInfoEntity);
+                });
+            }
+            return -1;
+        }
+        isRecycleVisible.setValue(true);
+        return 0;
     }
 
     @SuppressLint("DefaultLocale")
