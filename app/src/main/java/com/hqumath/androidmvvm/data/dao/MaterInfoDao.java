@@ -49,6 +49,6 @@ public interface MaterInfoDao {
 
     //使用内连接查询
     @Query("SELECT renter_id,mater,date,name,rent_room,rent_water from mater_info LEFT JOIN renter_info ON mater_info.renter_id=renter_info.id " +
-            "WHERE mater_info.date == :date ORDER BY 2")
+            "WHERE mater_info.date == :date ORDER BY 4")
     DataSource.Factory<Integer, ShowBatchRenterInfoEntity> getShowBatchRenterInfoEntity(String date);
 }
