@@ -108,16 +108,6 @@ public class BatchFragment extends BaseViewModelFragment<FragmentBatchBinding, B
             }
         });
         binding.list.setAdapter(adapter);
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (ShowBatchRenterInfoEntity renterInfoEntity : Objects.requireNonNull(adapter.getCurrentList())) {
-//                    viewModel.addMater(renterInfoEntity, renterInfoEntity.getMater(), date);
-
-                }
-
-            }
-        });
     }
 
     public void initViewObservable() {
