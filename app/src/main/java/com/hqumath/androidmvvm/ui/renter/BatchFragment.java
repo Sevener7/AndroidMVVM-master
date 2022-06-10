@@ -102,7 +102,7 @@ public class BatchFragment extends BaseViewModelFragment<FragmentBatchBinding, B
 
             @Override
             public void saveEdit(ShowBatchRenterInfoEntity renterInfoEntity, String value) {
-                if (value.length() > 2) {
+                if (Integer.parseInt(value) >= renterInfoEntity.getMater()) {
                     viewModel.saveMatter(renterInfoEntity, Integer.parseInt(value), date);
                 }
             }
@@ -112,7 +112,7 @@ public class BatchFragment extends BaseViewModelFragment<FragmentBatchBinding, B
             @Override
             public void onClick(View v) {
                 for (ShowBatchRenterInfoEntity renterInfoEntity : Objects.requireNonNull(adapter.getCurrentList())) {
-                    viewModel.addMater(renterInfoEntity, renterInfoEntity.getMater(), date);
+//                    viewModel.addMater(renterInfoEntity, renterInfoEntity.getMater(), date);
 
                 }
 

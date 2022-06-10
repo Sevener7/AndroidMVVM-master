@@ -132,8 +132,8 @@ public class BatchViewModel extends BaseViewModel<MyRepository> {
         entity.setMater(currentValue);
         entity.setDate(date);
         List<MaterInfoEntity> currentList = model.getAllMatersById(renterInfoEntity.getRenter_id());
-        if (currentList.size() > 0) {
-            double totalElect = (currentValue - currentList.get(currentList.size() - 1).getMater());
+        if (currentList.size() > 1) {
+            double totalElect = (currentValue - currentList.get(currentList.size() - 2).getMater());
             double totalElectMoney = totalElect * 1.3;
             double totalSpend = totalElectMoney + renterInfoEntity.getRent_room() + renterInfoEntity.getRent_water();
             entity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));
@@ -150,8 +150,17 @@ public class BatchViewModel extends BaseViewModel<MyRepository> {
         entity.setRenter_id(renterInfoEntity.getRenter_id());
         entity.setMater(currentValue);
         entity.setDate(date);
+        List<MaterInfoEntity> currentList = model.getAllMatersById(renterInfoEntity.getRenter_id());
+        if (currentList.size() > 1) {
+            double totalElect = (currentValue - currentList.get(currentList.size() - 2).getMater());
+            double totalElectMoney = totalElect * 1.3;
+            double totalSpend = totalElectMoney + renterInfoEntity.getRent_room() + renterInfoEntity.getRent_water();
+            entity.setUse_mater(Double.parseDouble(String.format("%.2f", totalElect)));
+            entity.setTotal_rent(Double.parseDouble(String.format("%.2f", totalElectMoney)));
+            entity.setTotal_spend(Double.parseDouble(String.format("%.2f", totalSpend)));
+        }
         model.runInTransaction(() -> {
-            model.insertMater(entity);
+          model.insertMater(entity);
         });
     }
 }
