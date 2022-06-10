@@ -144,4 +144,14 @@ public class BatchViewModel extends BaseViewModel<MyRepository> {
             model.insertMater(entity);
         });
     }
+    @SuppressLint("DefaultLocale")
+    public void saveMatter(ShowBatchRenterInfoEntity renterInfoEntity, int currentValue,String date) {
+        MaterInfoEntity entity = new MaterInfoEntity();
+        entity.setRenter_id(renterInfoEntity.getRenter_id());
+        entity.setMater(currentValue);
+        entity.setDate(date);
+        model.runInTransaction(() -> {
+            model.insertMater(entity);
+        });
+    }
 }

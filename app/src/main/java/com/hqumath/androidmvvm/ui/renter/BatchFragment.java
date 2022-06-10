@@ -2,6 +2,7 @@ package com.hqumath.androidmvvm.ui.renter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,6 +16,7 @@ import com.hqumath.androidmvvm.databinding.FragmentRenterBinding;
 import com.hqumath.androidmvvm.entity.NetworkState;
 import com.hqumath.androidmvvm.entity.RenterInfoEntity;
 import com.hqumath.androidmvvm.entity.ShowBatchRenterInfoEntity;
+import com.hqumath.androidmvvm.generated.callback.OnClickListener;
 import com.hqumath.androidmvvm.ui.add.addMater.AddMaterActivity;
 import com.hqumath.androidmvvm.ui.add.addMater.UpdateMaterActivity;
 import com.hqumath.androidmvvm.ui.view.dialog.DialogCancelListener;
@@ -23,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,11 +103,21 @@ public class BatchFragment extends BaseViewModelFragment<FragmentBatchBinding, B
             @Override
             public void saveEdit(ShowBatchRenterInfoEntity renterInfoEntity, String value) {
                 if (value.length() > 2) {
-                    viewModel.addMater(renterInfoEntity,Integer.parseInt(value),date);
+                    viewModel.saveMatter(renterInfoEntity, Integer.parseInt(value), date);
                 }
             }
         });
         binding.list.setAdapter(adapter);
+        binding.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (ShowBatchRenterInfoEntity renterInfoEntity : Objects.requireNonNull(adapter.getCurrentList())) {
+                    viewModel.addMater(renterInfoEntity, renterInfoEntity.getMater(), date);
+
+                }
+
+            }
+        });
     }
 
     public void initViewObservable() {
